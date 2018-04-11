@@ -1,0 +1,21 @@
+/* Feuille de styles */
+
+body { background: #eee }
+
+.container {
+  background: #fff;
+  padding: 4em;
+}
+
+#prix {
+	font-size: 3em;
+}
+
+#avatar {
+	width: 4em;
+	margin-right: 0.5em;
+}
+
+#forceMotPasse {
+	display : none;
+}
