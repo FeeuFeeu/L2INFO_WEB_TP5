@@ -25,7 +25,6 @@ function checkName(name) {
  * 	i.e. contient un nom et un domaine separes d'un '@'
  * 	et le domaine contient un nom et une extension separes d'un '.'
  */
-
 function checkMail(mail) {
 	var mail_divise = mail.split('@');
 	/* Si le tableau de chaines separees
@@ -38,7 +37,6 @@ function checkMail(mail) {
 	 * d'un nom et d'une extension separes par un point,
 	 * on utilise le meme procede que precedemment */
 	var domaine_divise = mail_divise[1].split(".");
-	console.log(domaine_divise);
 	if(domaine_divise.length!=2 || domaine_divise[1]=="") return false;
 	return true;
 }
@@ -54,7 +52,6 @@ function checkMail(mail) {
  * 	i.e. est divisible par 400
  * 	ou divisible par 4 mais pas par 100
  */
-
 function isLeapYear(year) {
 	return (parseInt(year)%400==0)||((parseInt(year)%4==0)&&(parseInt(year)%100!=0));
 }
@@ -67,7 +64,6 @@ function isLeapYear(year) {
  * @return
  * 	vraie si la date est valide, faux sinon
  */
-
 function checkDate(day,month,year) {
 	if(day==null || month==null || year==null) return false;
 	/* Si le mois est
@@ -99,10 +95,25 @@ function checkDate(day,month,year) {
  * 	vraie si les deux mots de passe sont identiques et s'ils ont
  * 	une longueur d'au moins 6
  */
-
 function checkPasswords(pass1,pass2) {
 	return ((pass1.length>=6) && (pass1==pass2));
 }
 
+/*
+ * 
+ * name: checkPasswdStrength
+ * @param
+ * 	pass -> mot de passe (chaine de caracteres)
+ * @return
+ * 	2 -> si le mot de passe a une securite forte (minuscule, majuscule et chiffre)
+ * 	1 -> si securite intermediaire (au moins 6 caracteres)
+ * 	0 -> sinon (securite insuffisante)
+ */
+function checkPasswdStrength(pass) {
+	var regex = '((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])).{6,}';
+	if(pass.match(regex)) return 2;
+	else if (pass.length<=6) return 0;
+	else return 1;
+}
 
 

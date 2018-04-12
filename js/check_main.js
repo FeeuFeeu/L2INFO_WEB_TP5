@@ -21,9 +21,12 @@ $(document).ready(function() {
         el.removeClass('is-valid');
       });
     },
-    // A FINIR
-    progress: function(_fields) {
-		$('#formProgress').css('width','10%');
+    
+    // Applique le pourcentage
+    // à la barre de progression
+    progress: function() {
+		var pourcentage = (($('.is-valid').length)/$('input').length)*100;
+		$('#formProgress').css('width',pourcentage+"%");
 	}
   };
 	
@@ -55,7 +58,6 @@ $(document).ready(function() {
 
   // Listeners
   // lance une fonction de verification sur tous les champs
-  nb_champs_valides = 0;
   $.each(Fields, function(index, element) {
     element.change(function() {
       var checker = Checker[index];
@@ -65,7 +67,7 @@ $(document).ready(function() {
       } else {
         Feedback.invalidate(checker.data);
       }
-      Feedback.progress(Fields);
+      Feedback.progress();
     });
   });
 
@@ -76,4 +78,43 @@ $(document).ready(function() {
     console.log('TODO: verifier si tout est OK !');
     // TODO: envoyer si tout est OK
   });
+  
+  
+  
+	/// ** Affichage de la force du mot de passe a chaque appui sur le clavier *//
+	Fields.inputMotPasse.keyup( function() {
+		var retour = checkPasswdStrength($(this).val());
+		if(retour==0) {
+			$('#forceMotPasse').css('width','40%');
+			$('#forceMotPasse').removeClass($('#forceMotPasse').attr('class'));
+			$('#forceMotPasse').addClass('progress-bar bg-danger');
+			$('#texteForceMotPasse').removeClass($('#texteForceMotPasse').attr('class'));
+			$('#texteForceMotPasse').addClass('text-danger');
+			$('#texteForceMotPasse').text("Mot de passe invalide.");
+		}
+		else if(retour==1) {
+			$('#forceMotPasse').css('width','70%');
+			$('#forceMotPasse').removeClass($('#forceMotPasse').attr('class'));
+			$('#forceMotPasse').addClass('progress-bar bg-warning');
+			$('#texteForceMotPasse').removeClass($('#texteForceMotPasse').attr('class'));
+			$('#texteForceMotPasse').addClass('text-warning');
+			$('#texteForceMotPasse').text("Force du mot de passe faible.");
+		}
+		else {
+			$('#forceMotPasse').css('width','100%');
+			$('#forceMotPasse').removeClass($('#forceMotPasse').attr('class'));
+			$('#forceMotPasse').addClass('progress-bar bg-success');
+			$('#texteForceMotPasse').removeClass($('#texteForceMotPasse').attr('class'));
+			$('#texteForceMotPasse').addClass('text-success');
+			$('#texteForceMotPasse').text("Force du mot de passe excellente.");
+		}
+	});
+	
+	
+	$('#boutonInscription').click( function() {
+		$('input').each( function() {
+			if(this.attr('class')=='is-invalid')
+				this.
+		});
+	});
 });
