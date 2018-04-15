@@ -84,37 +84,38 @@ $(document).ready(function() {
 	/// ** Affichage de la force du mot de passe a chaque appui sur le clavier *//
 	Fields.inputMotPasse.keyup( function() {
 		var retour = checkPasswdStrength($(this).val());
+		$('#forceMotPasse').removeClass($('#forceMotPasse').attr('class'));
+		$('#texteForceMotPasse').removeClass($('#texteForceMotPasse').attr('class'));
 		if(retour==0) {
 			$('#forceMotPasse').css('width','40%');
-			$('#forceMotPasse').removeClass($('#forceMotPasse').attr('class'));
 			$('#forceMotPasse').addClass('progress-bar bg-danger');
-			$('#texteForceMotPasse').removeClass($('#texteForceMotPasse').attr('class'));
 			$('#texteForceMotPasse').addClass('text-danger');
 			$('#texteForceMotPasse').text("Mot de passe invalide.");
 		}
 		else if(retour==1) {
 			$('#forceMotPasse').css('width','70%');
-			$('#forceMotPasse').removeClass($('#forceMotPasse').attr('class'));
 			$('#forceMotPasse').addClass('progress-bar bg-warning');
-			$('#texteForceMotPasse').removeClass($('#texteForceMotPasse').attr('class'));
 			$('#texteForceMotPasse').addClass('text-warning');
 			$('#texteForceMotPasse').text("Force du mot de passe faible.");
 		}
 		else {
 			$('#forceMotPasse').css('width','100%');
-			$('#forceMotPasse').removeClass($('#forceMotPasse').attr('class'));
 			$('#forceMotPasse').addClass('progress-bar bg-success');
-			$('#texteForceMotPasse').removeClass($('#texteForceMotPasse').attr('class'));
 			$('#texteForceMotPasse').addClass('text-success');
 			$('#texteForceMotPasse').text("Force du mot de passe excellente.");
 		}
 	});
 	
-	
+	/// ** Affichage des champs invalides avant l'envoi du formulaire d'inscription *//
 	$('#boutonInscription').click( function() {
-		$('input').each( function() {
-			if(this.attr('class')=='is-invalid')
-				this.
-		});
+		// Recuperation des champs non validés
+		// Sauf la checkbox et le bouton d'envoi
+		champs_non_valides = $('#sign').find(':input').not('.is-valid').not('.form-check-input').not('.btn');
+		if(champs_non_valides.length>0)
+			Feedback.error([champs_non_valides]);
+		// Si tous les champs sont valides,
+		// On vérifie la checkbox
+		else if($('#confInscr').not(':checked'))
+			Feedback.error([$('#confInscr')]);
 	});
 });
