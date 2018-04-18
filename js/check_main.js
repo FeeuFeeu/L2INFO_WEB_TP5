@@ -25,8 +25,9 @@ $(document).ready(function() {
     // Applique le pourcentage
     // à la barre de progression
     progress: function() {
-		var pourcentage = (($('.is-valid').length)/$('input').length)*100;
-		$('#formProgress').css('width',pourcentage+"%");
+		var pourcentage = (($('.is-valid').length)/$('input').length);
+		pourcentage*=$('#formProgress').parent().width();
+		$('#formProgress').animate({'width':pourcentage+"px"});
 	}
   };
 	
