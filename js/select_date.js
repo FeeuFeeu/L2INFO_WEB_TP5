@@ -9,7 +9,7 @@ $(document).ready(function() {
 	}
 	
 	// Liste des mois
-	var liste_mois = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre'];
+	var liste_mois = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'];
 	for(var mois=1;mois<=12;mois++) {
 		var element = '<option value="'+mois+'">'+liste_mois[mois-1]+'</option>';
 		element = $(element);
